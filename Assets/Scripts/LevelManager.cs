@@ -6,23 +6,32 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour {
 
     public static LevelManager instance;
-
-    public GameObject theCharacter;
-    public GameObject theKey;
-    public GameObject keyHole;
-    public GameObject theDoor;
-
-    private bool hasKey;
+    public GameObject door;
+    public doorController doorCon;
+    public float doorSpeed;
+    public bool hasKey;
 
     private void Awake()
     {
-        // set the instance property/variable to this object
         instance = this;
+        doorSpeed = 0;
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+   public void KeyCollected()
     {
-       
+        hasKey = true;
+
+        Debug.Log("Key Collected");
+    }
+
+    public void UsedKey()
+    {
+        hasKey = false;
+
+        doorSpeed = 20;
+        doorCon.SetDoorSpeed(doorSpeed);
+        
+        Debug.Log("Key Used");
     }
     
 }
